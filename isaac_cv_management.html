@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצחק סיגלר - מנהל תפעול ופיתוח</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Heebo', 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 350px 1fr;
+        }
+        
+        .sidebar {
+            background: linear-gradient(45deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px 30px;
+            position: relative;
+        }
+        
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") opacity(0.05);
+            pointer-events: none;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title {
+            font-size: 1.3em;
+            color: #bdc3c7;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .icon {
+            width: 20px;
+            margin-left: 10px;
+            text-align: center;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            color: #3498db;
+        }
+        
+        .skill-category {
+            margin-bottom: 20px;
+        }
+        
+        .skill-category h4 {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #ecf0f1;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            background: rgba(255,255,255,0.1);
+            margin-bottom: 5px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-list li:hover {
+            background: rgba(52, 152, 219, 0.3);
+            transform: translateX(-5px);
+        }
+        
+        .main-content {
+            padding: 40px 40px 40px 30px;
+            background: #fafbfc;
+        }
+        
+        .main-section {
+            margin-bottom: 35px;
+        }
+        
+        .main-section-title {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .main-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            border-radius: 2px;
+        }
+        
+        .intro-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-right: 4px solid #3498db;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .experience-item {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+        }
+        
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .job-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .company-name {
+            color: #7f8c8d;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+        
+        .job-period {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .job-description {
+            list-style: none;
+        }
+        
+        .job-description li {
+            position: relative;
+            padding-right: 25px;
+            margin-bottom: 8px;
+            color: #34495e;
+            line-height: 1.6;
+        }
+        
+        .job-description li::before {
+            content: '●';
+            color: #3498db;
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }
+        
+        .volunteer-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-right: 4px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+        
+        .volunteer-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .volunteer-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .volunteer-org {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .info-card h4 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .info-card ul {
+            list-style: none;
+        }
+        
+        .info-card li {
+            padding: 5px 0;
+            color: #34495e;
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .info-card li::before {
+            content: '✓';
+            color: #27ae60;
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .personal-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile-header">
+                <h1 class="name">יצחק סיגלר</h1>
+                <h2 class="title">מנהל תפעול ופיתוח</h2>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="icon">📱</span>
+                    <span>053-318-3940</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">✉️</span>
+                    <span>ysigler940@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">🏡</span>
+                    <span>אשדוד</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">👨‍👩‍👧‍👦</span>
+                    <span>נשוי + 3</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">📅</span>
+                    <span>גיל 30</span>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">כישורים מקצועיים</h3>
+                
+                <div class="skill-category">
+                    <h4>ניהול וארגון</h4>
+                    <ul class="skill-list">
+                        <li>ניהול צוותים גדולים (150+ עובדים)</li>
+                        <li>ניהול פרויקטים</li>
+                        <li>גיוס והשמה</li>
+                        <li>בקרה ודוחות</li>
+                        <li>שימועים וביקורות</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>כישורים טכניים</h4>
+                    <ul class="skill-list">
+                        <li>פיתוח Full Stack</li>
+                        <li>אחזקה ותחזוקה</li>
+                        <li>מתקני מים תעשייתיים</li>
+                        <li>פיקוח כשרות</li>
+                        <li>תיקונים טכניים</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h4>כישורי מחשב</h4>
+                    <ul class="skill-list">
+                        <li>חבילת Office</li>
+                        <li>React.js & Node.js</li>
+                        <li>ניהול מסדי נתונים</li>
+                        <li>דוחות ובקרה</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">רישיונות והסמכות</h3>
+                <ul class="skill-list">
+                    <li>רישיון נהיגה B</li>
+                    <li>רישיון אופנוע A1</li>
+                    <li>היתר רכב חירום</li>
+                    <li>הסמכת חובש מד"א</li>
+                    <li>רכיבה מקצועית</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3 class="section-title">שפות</h3>
+                <ul class="skill-list">
+                    <li>עברית - שפת אם</li>
+                    <li>יידיש - שפת אם</li>
+                    <li>אנגלית - בסיסי</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="main-section">
+                <div class="intro-text">
+                    <strong>בעל ניסיון עשיר ורקע מגוון</strong> בניהול צוותים גדולים, פרויקטים מורכבים ותפעול מערכות. משלב בין מומחיות ניהולית למעשית לבין כישורים טכנולוגיים מתקדמים. מתמחה בהובלת שינויים, שיפור תהליכים וניהול תפעולי יעיל. <span class="highlight">מעוניין להוביל תפקידים מגוונים ומאתגרים המשלבים חשיבה אסטרטגית עם ביצוע בשטח.</span>
+                </div>
+            </div>
+            
+            <div class="main-section">
+                <h3 class="main-section-title">ניסיון תעסוקתי</h3>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">מתכנת Full Stack</div>
+                            <div class="company-name">פיתוח עצמאי ופרויקטים</div>
+                        </div>
+                        <div class="job-period">2024-2025</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>פיתוח אפליקציות ווב מתקדמות בטכנולוגיות React.js ו-Node.js</li>
+                        <li>ניהול פרויקטים טכנולוגיים מקצה לקצה</li>
+                        <li>התמחות בפתרונות Full Stack מורכבים</li>
+                        <li>ניתוח דרישות ותכנון ארכיטקטורת מערכות</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">מנהל התקנות מתקני מים תעשייתיים</div>
+                            <div class="company-name">מים בריאים</div>
+                        </div>
+                        <div class="job-period">2025</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>ניהול והתקנת מערכות מים תעשייתיות מתקדמות</li>
+                        <li>תכנון ופיקוח על התקנות סודה ומים חמים</li>
+                        <li>ניהול לוחות זמנים ותיאום עם לקוחות</li>
+                        <li>בקרת איכות ותחזוקה מונעת</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">מנהל תוכנית חברים - שירות אזרחי דרום</div>
+                            <div class="company-name">עמותת חברים</div>
+                        </div>
+                        <div class="job-period">2022-2023</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>ניהול וליווי של 150 בני שירות באזור הדרום</li>
+                        <li>גיוס, קליטה ושיבוץ בני שירות בגופים ביטחוניים וחברתיים (מד"א, משטרה, כיבוי אש, בתי סוהר, גמחים וארגוני חסד)</li>
+                        <li>ביצוע ביקורות שטח ומעקב אחר נוכחות ודיווחים</li>
+                        <li>ניהול מערך השכר והדוחות הכספיים</li>
+                        <li>ביצוע שימועים ופתרון בעיות משמעתיות</li>
+                        <li>הכשרה וליווי של מנהלי צוותים זוטרים</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">מנהל אחזקה</div>
+                            <div class="company-name">מוסדות חזון מאיר אשדוד</div>
+                        </div>
+                        <div class="job-period">2019-2021</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>ניהול תפעולי מלא של מתחמי לימוד גדולים</li>
+                        <li>תכנון ויישום תחזוקה מונעת ושוטפת</li>
+                        <li>תיאום עבודות עם קבלנים ובעלי מקצוע</li>
+                        <li>ניהול תקציבים ובקרת עלויות</li>
+                        <li>פיקוח על בטיחות ועמידה בתקנים</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">מנהל קשרי לקוחות</div>
+                            <div class="company-name">לנציצקי תכשיטים</div>
+                        </div>
+                        <div class="job-period">2018-2019</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>ניהול מערך שירות לקוחות מקצועי</li>
+                        <li>ייעוץ מקצועי ומתן פתרונות מותאמים</li>
+                        <li>ניהול ופיתוח קו מכירות שטח</li>
+                        <li>בניית יחסי לקוחות ארוכי טווח</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-item">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">משגיח כשרות</div>
+                            <div class="company-name">כשרות קהילות ומחלבות טרה</div>
+                        </div>
+                        <div class="job-period">2016-2018</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>פיקוח והבטחת עמידה בתקני כשרות מחמירים במספר חברות</li>
+                        <li>עבודה בצוות תחת לחץ ובאחריות גבוהה</li>
+                        <li>דיווח ותיעוד מקצועי של תהליכי הייצור</li>
+                        <li>ליווי והדרכה של עובדי הייצור בנושאי כשרות</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="main-section">
+                <h3 class="main-section-title">התנדבות בקהילה</h3>
+                
+                <div class="volunteer-item">
+                    <div class="volunteer-title">חובש ונהג אמבולנס</div>
+                    <div class="volunteer-org">מגן דוד אדום - יותר מ-2 שנים</div>
+                </div>
+                
+                <div class="volunteer-item">
+                    <div class="volunteer-title">רוכב אופנוע לעזרה ראשונה</div>
+                    <div class="volunteer-org">מגן דוד אדום - צוות התגובה המיידי</div>
+                </div>
+                
+                <div class="volunteer-item">
+                    <div class="volunteer-title">סיירת מתנדבים בחירום</div>
+                    <div class="volunteer-org">עיריית אשדוד</div>
+                </div>
+                
+                <div class="volunteer-item">
+                    <div class="volunteer-title">ידידים - מבצעי חילוץ</div>
+                    <div class="volunteer-org">ארגון הצלה והחילוץ</div>
+                </div>
+                
+                <div class="volunteer-item">
+                    <div class="volunteer-title">מקדם תעסוקה בקהילה</div>
+                    <div class="volunteer-org">להחזיקם ולהחיותם</div>
+                </div>
+            </div>
+            
+            <div class="main-section">
+                <h3 class="main-section-title">מידע נוסף</h3>
+                
+                <div class="personal-info">
+                    <div class="info-card">
+                        <h4>עמידה בלחץ ומנהיגות</h4>
+                        <ul>
+                            <li>ניסיון בניהול צוותים בסביבות מאתגרות</li>
+                            <li>עבודה בחירום ומצבי לחץ</li>
+                            <li>קבלת החלטות מהירה ויעילה</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>גמישות ויוזמה</h4>
+                        <ul>
+                            <li>נכונות לנסיעות בכל הארץ</li>
+                            <li>מתן מענה מקצועי בזמן אמת</li>
+                            <li>גישה פרואקטיבית ויוזמה אישית</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>כישורים בין-אישיים</h4>
+                        <ul>
+                            <li>יכולת הנעה וליווי עובדים</li>
+                            <li>תקשורת יעילה עם לקוחות</li>
+                            <li>פתרון קונפליקטים ובעיות</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4>ערכים מקצועיים</h4>
+                        <ul>
+                            <li>אמינות ואחריות גבוהה</li>
+                            <li>שאיפה למצוינות ושיפור מתמיד</li>
+                            <li>עבודת צוות ושיתוף פעולה</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px; padding: 20px; background: linear-gradient(45deg, #3498db, #2ecc71); border-radius: 10px; color: white;">
+                <strong>* המלצות מקצועיות יסופקו על פי דרישה *</strong>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
